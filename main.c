@@ -233,7 +233,26 @@ void imprimirTexto(void) {
 }
 
 void imprimirQRCode(void) {
-    
+    if (!conexaoAberta) { /* 1) conexão aberta? */
+ 		printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
+ 		return; /* não está: avisa e SAI da função */
+ 	}
+ 	
+ 	char texto[200]; /* 2) só agora pergunta */
+ 	
+ 	//capturarEntrada("Texto a imprimir: ", texto, sizeof(texto));
+ 	//int copias = lerInteiro("Quantas copias? ");
+ 	//capturarEntrada("Quantidade de copias: ", copias, sizeof(copias));
+ 	//for (i = 1; i <= copias; i++) { /* laço: repete a impressão */
+ 	int retorno = ImpressaoQRCode(texto, 6, 4); /* 3) chama o comando */
+ 	if (retorno >= 0) { /* 4) confere o retorno */
+ 	//printf("Copia %d impressa!\n", i);
+ } else {
+ printf("Erro ao imprimir. Codigo: %d\n", retorno);
+ }
+ 
+ Corte(5); /* corta o papel */
+
 }
 
 void imprimirCodigoBarras(void) {
@@ -344,10 +363,10 @@ int main(void) {
         	case 4:
         		imprimirTexto();
         		break;
-        	/*case 5:
+        	case 5:
         		imprimirQRCode();
         		break;
-        	case 6:
+        	/*case 6:
         		imprimirCodigoBarras();
         		break;
         	case 7:
