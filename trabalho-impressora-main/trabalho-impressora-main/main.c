@@ -254,7 +254,7 @@ void imprimirCodigoBarras(void) {
  	}
  	
  	char texto[200];
- 	int retorno = ImpressaoCodigoBarras(texto, 6, 4);
+ 	int retorno = ImpressaoCodigoBarras(8, "{A12345678912", 100, 2, 3);
  	if (retorno >= 0) {
  	   printf("Copia impressa com sucesso!\n");
  } else {
@@ -264,7 +264,7 @@ void imprimirCodigoBarras(void) {
  Corte(5);
 
 }
-}
+
 
 void imprimirXMLSAT(void) {
      if (!conexaoAberta) {
@@ -298,7 +298,7 @@ void imprimirXMLCancelamentoSAT(void) {
        printf("Nao foi possivel ler o CANC_SAT.xml\n");
        return;
 }   	
-     int retorno = ImprimeXMLSAT(dadosXML, 0);
+     int retorno = ImprimeXMLCancelamentoSAT(dadosXML, ASS_QRCODE, 0);
         Corte(5);
         free(dadosXML);
         if (retorno == 0) {
@@ -315,7 +315,7 @@ void abrirGavetaElgin(void) {
        printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
        return;
 }
-       	int retorno = AbreGavetaElgin();
+       	int retorno = AbreGavetaElgin(1, 5, 5);
        	if (retorno >= 0) {
  	   printf("GavetaElgin aberta com sucesso!\n");
 }
@@ -329,7 +329,7 @@ void abrirGaveta(void) {
        printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
        return;
 }
-       int retorno = AbreGaveta();
+       int retorno = AbreGaveta(1, 5, 5);
        	if (retorno >= 0) {
  	   printf("Gaveta aberta com sucesso!\n");
 }
@@ -344,8 +344,7 @@ void emitirSinalSonoro(void) {
        return;
 }
        
-       SinalSonoro)(int qtd, int tempoInicio, int tempoFim);
-       int retorno = SinalSonoro(1000, 1, 10);
+       int retorno = SinalSonoro(5, 5, 5);
        	if (retorno >= 0) { 
  	   printf("Sinal sonoro emitido com sucesso!\n");
 }
@@ -358,7 +357,7 @@ int fazerLogin() {
 	char user[50], password[50];
 	int i;
 
-	
+	int qtd = 3;
 	for (i = 1; i <= 3; i++) {
 		capturarEntrada("Enter user: ", user, sizeof(user));
 		capturarEntrada("Enter password: ", password, sizeof(password));
@@ -366,12 +365,15 @@ int fazerLogin() {
 			return 1;
 		}
 		else{
-			int qtd = 2;
-			printf("Tentativas restantes: %d\n", qtd--);
+			qtd = qtd - 1;
+			printf("Tentativas restantes: %d\n", qtd);
+			if(qtd == 0) {
+				printf("Voce nao tem mais tentativas.");
+				return 0;
+			}
 		}
 	}
-	printf("Voce nao tem mais tentativas.");
-	return 0;
+	
 }
 
 void exibirMenu(void) {
@@ -412,10 +414,12 @@ int main(void) {
         return 1;
     }
     
-    fazerLogin();
-
+    if(!fazerLogin()){
+    	return 0;
+	}
+	else{
     int opcao = -1;
-    while (opcao != 0) {
+    while (opcao != 0 ) {
         exibirMenu();
         opcao = lerInteiro("\nDigite a opcao desejada: ");
         
@@ -451,15 +455,16 @@ int main(void) {
         		abrirGaveta();
         		break;
         	case 11:
-        		sinalSonoro();
+        		emitirSinalSonoro();
         		break;
-        	case 0:
+        	case 0 :
         		return 0;
         		
 		}
 
         //...
     }
+}
 
     FreeLibrary(dll);
     return 0;
