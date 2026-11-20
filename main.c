@@ -109,6 +109,10 @@ static int conexaoAberta = 0;       /* 0 = fechada, 1 = aberta */
 static int tipo = 1;                /* 1 = USB, 2 = Serial, 3 = Rede... */
 static char modelo[50] = "i9";      /* "i8" ou "i9" */
 static char conexao[50] = "USB";
+<<<<<<< HEAD
+=======
+//static char login[2] = {"admin", "1234"};
+>>>>>>> b2408cf3512c977986b2edaac0f84db3489b2459
 static int parametro = 0;
 
 /* Chave do QR Code usada no cancelamento SAT */
@@ -216,12 +220,23 @@ void imprimirTexto(void) {
  	char texto[200]; /* 2) só agora pergunta */
  	
  	capturarEntrada("Texto a imprimir: ", texto, sizeof(texto));
+<<<<<<< HEAD
  	int retorno = ImpressaoTexto(texto, 1, 4, 0); /* 3) chama o comando */
  	if (retorno >= 0) { /* 4) confere o retorno */
        printf("Copia impressa com sucesso!\n");
  }
     else {
          printf("Erro ao imprimir. Codigo: %d\n", retorno);
+=======
+ 	//int copias = lerInteiro("Quantas copias? ");
+ 	//capturarEntrada("Quantidade de copias: ", copias, sizeof(copias));
+ 	//for (i = 1; i <= copias; i++) { /* laço: repete a impressão */
+ 	int retorno = ImpressaoTexto(texto, 1, 4, 0); /* 3) chama o comando */
+ 	if (retorno >= 0) { /* 4) confere o retorno */
+ 	//printf("Copia %d impressa!\n", i);
+ } else {
+ printf("Erro ao imprimir. Codigo: %d\n", retorno);
+>>>>>>> b2408cf3512c977986b2edaac0f84db3489b2459
  }
  
  Corte(5); /* corta o papel */
@@ -236,9 +251,20 @@ void imprimirQRCode(void) {
  	}
  	
  	char texto[200]; /* 2) só agora pergunta */
+<<<<<<< HEAD
  	int retorno = ImpressaoQRCode(texto, 6, 4); /* 3) chama o comando */
  	if (retorno >= 0) { /* 4) confere o retorno */
  	   printf("Copia impressa com sucesso!\n");
+=======
+ 	
+ 	//capturarEntrada("Texto a imprimir: ", texto, sizeof(texto));
+ 	//int copias = lerInteiro("Quantas copias? ");
+ 	//capturarEntrada("Quantidade de copias: ", copias, sizeof(copias));
+ 	//for (i = 1; i <= copias; i++) { /* laço: repete a impressão */
+ 	int retorno = ImpressaoQRCode(texto, 6, 4); /* 3) chama o comando */
+ 	if (retorno >= 0) { /* 4) confere o retorno */
+ 	//printf("Copia %d impressa!\n", i);
+>>>>>>> b2408cf3512c977986b2edaac0f84db3489b2459
  } else {
  printf("Erro ao imprimir. Codigo: %d\n", retorno);
  }
@@ -248,6 +274,7 @@ void imprimirQRCode(void) {
 }
 
 void imprimirCodigoBarras(void) {
+<<<<<<< HEAD
     if (!conexaoAberta) { /* 1) conexão aberta? */
  		printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
  		return; /* não está: avisa e SAI da função */
@@ -307,10 +334,27 @@ void imprimirXMLCancelamentoSAT(void) {
         else {
         printf("Erro ao imprimir CANC_SAT. Codigo: %d\n", retorno);
 }
+=======
+    
+}
+
+void imprimirXMLSAT(void) {
+    
+        /* le o arquivo XML (na raiz do projeto) para a memoria */
+        //char *dadosXML = lerArquivo("XMLSAT.xml");
+        
+}
+
+void imprimirXMLCancelamentoSAT(void) {
+    	
+    	/* le o arquivo XML (na raiz do projeto) para a memoria */
+        //char *dadosXML = lerArquivo("CANC_SAT.xml");
+>>>>>>> b2408cf3512c977986b2edaac0f84db3489b2459
         
 }
 
 void abrirGavetaElgin(void) {
+<<<<<<< HEAD
     if (!conexaoAberta) {
        printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
        return;
@@ -351,13 +395,28 @@ void emitirSinalSonoro(void) {
      else{
         printf("Erro ao emitir o sinal sonoro: %d\n", retorno);
 }
+=======
+    
+}
+
+void abrirGaveta(void) {
+    
+}
+
+void emitirSinalSonoro(void) {
+    
+>>>>>>> b2408cf3512c977986b2edaac0f84db3489b2459
 }
 
 int fazerLogin() {
 	char user[50], password[50];
 	int i;
 
+<<<<<<< HEAD
 	int qtd = 3;
+=======
+	
+>>>>>>> b2408cf3512c977986b2edaac0f84db3489b2459
 	for (i = 1; i <= 3; i++) {
 		capturarEntrada("Enter user: ", user, sizeof(user));
 		capturarEntrada("Enter password: ", password, sizeof(password));
@@ -365,6 +424,7 @@ int fazerLogin() {
 			return 1;
 		}
 		else{
+<<<<<<< HEAD
 			qtd = qtd - 1;
 			printf("Tentativas restantes: %d\n", qtd);
 			if(qtd == 0) {
@@ -374,6 +434,14 @@ int fazerLogin() {
 		}
 	}
 	
+=======
+			int qtd = 2;
+			printf("Tentativas restantes: %d\n", qtd--);
+		}
+	}
+	printf("Voce nao tem mais tentativas.");
+	return 0;
+>>>>>>> b2408cf3512c977986b2edaac0f84db3489b2459
 }
 
 void exibirMenu(void) {
@@ -414,12 +482,19 @@ int main(void) {
         return 1;
     }
     
+<<<<<<< HEAD
     if(!fazerLogin()){
     	return 0;
 	}
 	else{
     int opcao = -1;
     while (opcao != 0 ) {
+=======
+    fazerLogin();
+
+    int opcao = -1;
+    while (opcao != 0) {
+>>>>>>> b2408cf3512c977986b2edaac0f84db3489b2459
         exibirMenu();
         opcao = lerInteiro("\nDigite a opcao desejada: ");
         
@@ -439,7 +514,11 @@ int main(void) {
         	case 5:
         		imprimirQRCode();
         		break;
+<<<<<<< HEAD
         	case 6:
+=======
+        	/*case 6:
+>>>>>>> b2408cf3512c977986b2edaac0f84db3489b2459
         		imprimirCodigoBarras();
         		break;
         	case 7:
@@ -455,16 +534,26 @@ int main(void) {
         		abrirGaveta();
         		break;
         	case 11:
+<<<<<<< HEAD
         		emitirSinalSonoro();
         		break;
         	case 0 :
         		return 0;
+=======
+        		sinalSonoro();
+        		break;
+        	case 0:
+        		return 0;*/
+>>>>>>> b2408cf3512c977986b2edaac0f84db3489b2459
         		
 		}
 
         //...
     }
+<<<<<<< HEAD
 }
+=======
+>>>>>>> b2408cf3512c977986b2edaac0f84db3489b2459
 
     FreeLibrary(dll);
     return 0;
