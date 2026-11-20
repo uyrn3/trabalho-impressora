@@ -208,12 +208,12 @@ void fecharConexao(void) {
 }
 
 void imprimirTexto(void) {
- 	if (!conexaoAberta) { /* 1) conex„o aberta? */
+ 	if (!conexaoAberta) { /* 1) conex√£o aberta? */
  		printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
- 		return; /* n„o est·: avisa e SAI da funÁ„o */
+ 		return; /* n√£o est√°: avisa e SAI da fun√ß√£o */
  	}
  	
- 	char texto[200]; /* 2) sÛ agora pergunta */
+ 	char texto[200]; /* 2) s√≥ agora pergunta */
  	
  	capturarEntrada("Texto a imprimir: ", texto, sizeof(texto));
  	int retorno = ImpressaoTexto(texto, 1, 4, 0); /* 3) chama o comando */
@@ -230,12 +230,12 @@ void imprimirTexto(void) {
 }
 
 void imprimirQRCode(void) {
-    if (!conexaoAberta) { /* 1) conex„o aberta? */
+    if (!conexaoAberta) { /* 1) conex√£o aberta? */
  		printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
- 		return; /* n„o est·: avisa e SAI da funÁ„o */
+ 		return; /* n√£o est√°: avisa e SAI da fun√ß√£o */
  	}
  	
- 	char texto[200]; /* 2) sÛ agora pergunta */
+ 	char texto[200]; /* 2) s√≥ agora pergunta */
  	int retorno = ImpressaoQRCode(texto, 6, 4); /* 3) chama o comando */
  	if (retorno >= 0) { /* 4) confere o retorno */
  	   printf("Copia impressa com sucesso!\n");
@@ -248,9 +248,9 @@ void imprimirQRCode(void) {
 }
 
 void imprimirCodigoBarras(void) {
-    if (!conexaoAberta) { /* 1) conex„o aberta? */
+    if (!conexaoAberta) { /* 1) conex√£o aberta? */
  		printf("Conexao fechada. Abra a conexao antes (opcao 2).\n");
- 		return; /* n„o est·: avisa e SAI da funÁ„o */
+ 		return; /* n√£o est√°: avisa e SAI da fun√ß√£o */
  	}
  	
  	char texto[200];
